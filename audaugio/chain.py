@@ -42,7 +42,6 @@ class LinearChain(AugmentationChain):
         super().__init__(*args)
 
     def _apply_augmentations(self, signal: [], sr: int):
-        # start with just the original audio and then apply all augmentations
         augmented_audio = [signal]
         for augmentation in self._augmentations:
             augmented_audio_batch = []
