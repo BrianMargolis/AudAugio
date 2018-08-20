@@ -4,6 +4,7 @@ from typing import List
 import numpy as np
 
 from audaugio.augmentors.background_noise import BackgroundNoiseAugmentation
+from audaugio.augmentors.equalizer import EqualizerAugmentation
 from audaugio.augmentors.pitch_shift import PitchShiftAugmentation
 from audaugio.augmentors.time_stretch import TimeStretchAugmentation
 from audaugio.augmentors.windowing import WindowingAugmentation
@@ -138,6 +139,27 @@ class TestEqualizer(TestAugmentor):
         freq = 16000
         q = .1
         gain = 1
+        augmentor = EqualizerAugmentation(freq, q, gain)
+        augmented = augmentor.augment(self.audio, self.sr)
+        self.assertEqual(len(augmented), 1)
+        self.assertEqual(len(augmented[0]), len(self.audio))
+
+    def test_high_pass(self):
+        freq = 400
+        q = .2
+        gain = 3
+        augmentor = EqualizerAugmentation(freq, q, gain)
+        augmented = augmentor.augment(self.audio, self.sr)
+        self.assertEqual(len(augmented), 1)
+        self.assertEqual(len(augmented[0]), len(self.audio))
+
+    def test_returns_array(self):
+        freq = 800
+        q = .15
+        gain = 1
+        augmentor = EqualizerAugmentation(freq, q, gain)
+        augmented = augmentor.augment(self.audio, self.sr)
+        self.assertIsInstance(augmented, List)
 
 
 if __name__ == '__main__':
