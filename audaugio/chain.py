@@ -19,6 +19,13 @@ class AugmentationChain:
 
 class CombinatoricChain(AugmentationChain):
     def __init__(self, *args: Augmentation):
+        """
+        Apply augmentations combinatorically. This will return all possible combinations of non-replacing augmentations (i.e. when a non-replacing
+        augmentation is performed, both the resulting augmented signal and the original signal are kept and augmented further). Note that some augmentations,
+        like the windowing augmentation, always replace the audio they augment.
+
+        :param args: an arbitrary amount of augmentations
+        """
         super().__init__(*args)
 
     def _apply_augmentations(self, signal: [], sr: int):
@@ -39,6 +46,11 @@ class CombinatoricChain(AugmentationChain):
 
 class LinearChain(AugmentationChain):
     def __init__(self, *args: Augmentation):
+        """
+        Apply augmentations linearly. The signal is modified by each augmentation in the order that they are passed into the constructor.
+
+        :param args: an arbitrary amount of augmentations
+        """
         super().__init__(*args)
 
     def _apply_augmentations(self, signal: [], sr: int):

@@ -9,14 +9,21 @@ from audaugio.augmentation import Augmentation
 
 class EqualizerAugmentation(Augmentation):
     def __init__(self, frequency: float, resonance: float, gain: float):
+        """
+        Add an arbitrarily tall and wide frequency filter at an arbitrary frequency.
+
+        :param frequency: center of the filter
+        :param resonance: width of the filter as a q-factor
+        :param gain: height of the filter in dB
+        """
         super().__init__(replaces=False)
         self.transformer = sox.Transformer()
         self.transformer.equalizer(frequency, resonance, gain)
         self.input_file = './temporary_augmented_audio_in.wav'
         self.output_file = './temporary_augmented_audio_out.wav'
 
-    def augment(self, audio, sr):
-        librosa.output.write_wav(self.input_file, audio, sr=sr)
+    def augment(self, signal, sr):
+        librosa.output.write_wav(self.input_file, signal, sr=sr)
         try:
             self.transformer.build(self.input_file, self.output_file)
         except SoxError as e:
@@ -26,9 +33,9 @@ class EqualizerAugmentation(Augmentation):
                               "go to http://sox.sourceforge.net/ for a download link. Otherwise, double check your path variables.")
             else:
                 raise e
-        audio, sr = librosa.load(self.output_file, sr=sr)
+        signal, sr = librosa.load(self.output_file, sr=sr)
         self.cleanup()
-        return [audio]
+        return [signal]
 
     def cleanup(self):
         try:
