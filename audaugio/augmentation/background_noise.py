@@ -1,6 +1,6 @@
 import numpy as np
 
-from audaugio.augmentors.generics import Augmentation
+from audaugio.augmentation import Augmentation
 
 
 class BackgroundNoiseAugmentation(Augmentation):

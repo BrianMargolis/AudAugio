@@ -1,6 +1,6 @@
 import librosa
 
-from audaugio.augmentors.generics import Augmentation
+from audaugio.augmentation import Augmentation
 
 
 class TimeStretchAugmentation(Augmentation):

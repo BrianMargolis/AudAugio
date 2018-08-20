@@ -4,7 +4,7 @@ import librosa
 import sox
 from sox import SoxError
 
-from audaugio.augmentors.generics import Augmentation
+from audaugio.augmentation import Augmentation
 
 
 class EqualizerAugmentation(Augmentation):
