@@ -4,6 +4,7 @@ from typing import List
 import numpy as np
 
 from audaugio.augmentors.background_noise import BackgroundNoiseAugmentation
+from audaugio.augmentors.pitch_shift import PitchShiftAugmentation
 from audaugio.augmentors.time_stretch import TimeStretchAugmentation
 from audaugio.augmentors.windowing import WindowingAugmentation
 
@@ -109,6 +110,34 @@ class TestTimeStretch(TestAugmentor):
         augmentor = TimeStretchAugmentation(1.05)
         augmented = augmentor.augment(self.audio, self.sr)
         self.assertIsInstance(augmented, List)
+
+
+class TestPitchShift(TestAugmentor):
+    def test_pitch_up(self):
+        steps = np.random.randint(low=1, high=5)
+        augmentor = PitchShiftAugmentation(steps)
+        augmented = augmentor.augment(self.audio, self.sr)
+        self.assertEqual(len(augmented), 1)
+        self.assertEqual(len(augmented[0]), len(self.audio))
+
+    def test_pitch_down(self):
+        steps = -np.random.randint(low=1, high=5)
+        augmentor = PitchShiftAugmentation(steps)
+        augmented = augmentor.augment(self.audio, self.sr)
+        self.assertEqual(len(augmented), 1)
+        self.assertEqual(len(augmented[0]), len(self.audio))
+
+    def test_returns_array(self):
+        augmentor = PitchShiftAugmentation(1)
+        augmented = augmentor.augment(self.audio, self.sr)
+        self.assertIsInstance(augmented, List)
+
+
+class TestEqualizer(TestAugmentor):
+    def test_low_pass(self):
+        freq = 16000
+        q = .1
+        gain = 1
 
 
 if __name__ == '__main__':
