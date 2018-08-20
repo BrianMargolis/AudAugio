@@ -1,6 +1,6 @@
 import numpy as np
 
-from audiaug.augmentors.generics import Augmentation
+from audaugio.augmentors.generics import Augmentation
 
 
 class WindowingAugmentation(Augmentation):

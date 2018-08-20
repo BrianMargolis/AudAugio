@@ -1,6 +1,6 @@
 import librosa
 
-from audiaug.augmentors.generics import Augmentation
+from audaugio.augmentors.generics import Augmentation
 
 
 class TimeStretchAugmentation(Augmentation):

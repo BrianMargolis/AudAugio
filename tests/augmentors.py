@@ -3,9 +3,9 @@ from typing import List
 
 import numpy as np
 
-from audiaug.augmentors.background_noise import BackgroundNoiseAugmentation
-from audiaug.augmentors.time_stretch import TimeStretchAugmentation
-from audiaug.augmentors.windowing import WindowingAugmentation
+from audaugio.augmentors.background_noise import BackgroundNoiseAugmentation
+from audaugio.augmentors.time_stretch import TimeStretchAugmentation
+from audaugio.augmentors.windowing import WindowingAugmentation
 
 
 class TestAugmentor(unittest.TestCase):

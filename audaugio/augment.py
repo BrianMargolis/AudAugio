@@ -1,6 +1,6 @@
 from typing import List
 
-from audiaug.augmentors.generics import Augmentation
+from audaugio.augmentors.generics import Augmentation
 
 
 def apply_augmentations(augmentations: List[Augmentation], signal: [], sr: int):

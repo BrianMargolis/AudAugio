@@ -3,7 +3,7 @@ import os
 import librosa
 import sox
 
-from audiaug.augmentors.generics import Augmentation
+from audaugio.augmentors.generics import Augmentation
 
 
 class EqualizerAugmentation(Augmentation):
