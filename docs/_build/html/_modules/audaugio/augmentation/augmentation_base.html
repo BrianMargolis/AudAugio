@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>audaugio.augmentation.time_stretch &#8212; AudAugio 0.0.1a0 documentation</title>
+    <title>audaugio.augmentation.augmentation_base &#8212; AudAugio 0.0.1a0 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -31,25 +31,25 @@
 
           <div class="body" role="main">
             
-  <h1>Source code for audaugio.augmentation.time_stretch</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">librosa</span>
-
-<span class="kn">from</span> <span class="nn">.augmentation_base</span> <span class="k">import</span> <span class="n">AugmentationBase</span>
-
-
-<div class="viewcode-block" id="TimeStretchAugmentation"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.TimeStretchAugmentation">[docs]</a><span class="k">class</span> <span class="nc">TimeStretchAugmentation</span><span class="p">(</span><span class="n">AugmentationBase</span><span class="p">):</span>
+  <h1>Source code for audaugio.augmentation.augmentation_base</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="AugmentationBase"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.AugmentationBase">[docs]</a><span></span><span class="k">class</span> <span class="nc">AugmentationBase</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Change the duration of a signal without changing its pitch.</span>
+<span class="sd">    Base class for an augmentation. Implement this to create your own augmentations.</span>
 
-<span class="sd">    :param rate: factor by which to speed up or slow down the signal. When rate is 1, the signal is not modified.</span>
+<span class="sd">    :param replaces: whether the augmentation should replace the audio it augments. Usually will be false.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rate</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">replaces</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rate</span> <span class="o">=</span> <span class="n">rate</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">replaces</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="o">*</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replaces</span> <span class="o">=</span> <span class="n">replaces</span>
 
-<div class="viewcode-block" id="TimeStretchAugmentation.augment"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.TimeStretchAugmentation.augment">[docs]</a>    <span class="k">def</span> <span class="nf">augment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sr</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">librosa</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">time_stretch</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rate</span><span class="p">)]</span></div></div>
+<div class="viewcode-block" id="AugmentationBase.augment"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.AugmentationBase.augment">[docs]</a>    <span class="k">def</span> <span class="nf">augment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given a signal, apply the augmentation and return all resulting augmented audio as a list (even if it&#39;s a single signal).</span>
+
+<span class="sd">        :param signal: unaugmented signal, ndarray</span>
+<span class="sd">        :param sr: sample rate, int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
 </pre></div>
 
           </div>

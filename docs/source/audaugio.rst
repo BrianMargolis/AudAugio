@@ -7,18 +7,7 @@ Subpackages
 .. toctree::
 
     audaugio.augmentation
-
-Submodules
-----------
-
-audaugio\.chain module
-----------------------
-
-.. automodule:: audaugio.chain
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+    audaugio.chain
 
 Module contents
 ---------------
@@ -27,3 +16,4 @@ Module contents
     :members:
     :undoc-members:
     :show-inheritance:
+    :special-members:

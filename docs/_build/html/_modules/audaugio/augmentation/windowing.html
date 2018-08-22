@@ -34,24 +34,25 @@
   <h1>Source code for audaugio.augmentation.windowing</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">audaugio.augmentation</span> <span class="k">import</span> <span class="n">Augmentation</span>
+<span class="kn">from</span> <span class="nn">.augmentation_base</span> <span class="k">import</span> <span class="n">AugmentationBase</span>
 
 
-<div class="viewcode-block" id="WindowingAugmentation"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.windowing.WindowingAugmentation">[docs]</a><span class="k">class</span> <span class="nc">WindowingAugmentation</span><span class="p">(</span><span class="n">Augmentation</span><span class="p">):</span>
+<div class="viewcode-block" id="WindowingAugmentation"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.WindowingAugmentation">[docs]</a><span class="k">class</span> <span class="nc">WindowingAugmentation</span><span class="p">(</span><span class="n">AugmentationBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Window a signal into many segments of equal length. If hop_size is less than window_length, these windows will overlap.</span>
+
+<span class="sd">    :param window_length: the length in seconds of a window</span>
+<span class="sd">    :param hop_size: the distance in seconds between the start of each window</span>
+<span class="sd">    :param drop_last: whether to zero-pad the last segment of audio when it is shorter than window_length. If false, this part of the signal is dropped.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">hop_size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">drop_last</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Window a signal into many segments of equal length. If hop_size is less than window_length, these windows will overlap.</span>
-
-<span class="sd">        :param window_length: the length in seconds of a window</span>
-<span class="sd">        :param hop_size: the distance in seconds between the start of each window</span>
-<span class="sd">        :param drop_last: whether to zero-pad the last segment of audio when it is shorter than window_length. If false, this part of the signal is dropped.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">replaces</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">window_length</span> <span class="o">=</span> <span class="n">window_length</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hop_size</span> <span class="o">=</span> <span class="n">hop_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">drop_last</span> <span class="o">=</span> <span class="n">drop_last</span>
 
-<div class="viewcode-block" id="WindowingAugmentation.augment"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.windowing.WindowingAugmentation.augment">[docs]</a>    <span class="k">def</span> <span class="nf">augment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sr</span><span class="p">):</span>
+<div class="viewcode-block" id="WindowingAugmentation.augment"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.WindowingAugmentation.augment">[docs]</a>    <span class="k">def</span> <span class="nf">augment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sr</span><span class="p">):</span>
         <span class="n">window_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_length</span> <span class="o">*</span> <span class="n">sr</span>
         <span class="n">hop_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hop_size</span> <span class="o">*</span> <span class="n">sr</span>
         <span class="n">audio_samples</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -70,8 +71,8 @@
             <span class="n">last_segment</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">signal</span><span class="p">[</span><span class="n">start</span><span class="p">:],</span> <span class="n">pad</span><span class="p">)</span>
             <span class="n">segments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">last_segment</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">segments</span>
-</pre></div></div></div>
+        <span class="k">return</span> <span class="n">segments</span></div></div>
+</pre></div>
 
           </div>
           
@@ -95,8 +96,6 @@
 <ul>
   <li><a href="../../../index.html">Documentation overview</a><ul>
   <li><a href="../../index.html">Module code</a><ul>
-  <li><a href="../augmentation.html">audaugio.augmentation</a><ul>
-  </ul></li>
   </ul></li>
   </ul></li>
 </ul>

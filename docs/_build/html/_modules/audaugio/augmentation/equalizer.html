@@ -38,25 +38,26 @@
 <span class="kn">import</span> <span class="nn">sox</span>
 <span class="kn">from</span> <span class="nn">sox</span> <span class="k">import</span> <span class="n">SoxError</span>
 
-<span class="kn">from</span> <span class="nn">audaugio.augmentation</span> <span class="k">import</span> <span class="n">Augmentation</span>
+<span class="kn">from</span> <span class="nn">.augmentation_base</span> <span class="k">import</span> <span class="n">AugmentationBase</span>
 
 
-<div class="viewcode-block" id="EqualizerAugmentation"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.equalizer.EqualizerAugmentation">[docs]</a><span class="k">class</span> <span class="nc">EqualizerAugmentation</span><span class="p">(</span><span class="n">Augmentation</span><span class="p">):</span>
+<div class="viewcode-block" id="EqualizerAugmentation"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.EqualizerAugmentation">[docs]</a><span class="k">class</span> <span class="nc">EqualizerAugmentation</span><span class="p">(</span><span class="n">AugmentationBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add an arbitrarily tall and wide frequency filter at an arbitrary frequency.</span>
+
+<span class="sd">    :param frequency: center of the filter</span>
+<span class="sd">    :param resonance: width of the filter as a q-factor</span>
+<span class="sd">    :param gain: height of the filter in dB</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">resonance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add an arbitrarily tall and wide frequency filter at an arbitrary frequency.</span>
-
-<span class="sd">        :param frequency: center of the filter</span>
-<span class="sd">        :param resonance: width of the filter as a q-factor</span>
-<span class="sd">        :param gain: height of the filter in dB</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">replaces</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span> <span class="o">=</span> <span class="n">sox</span><span class="o">.</span><span class="n">Transformer</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="o">.</span><span class="n">equalizer</span><span class="p">(</span><span class="n">frequency</span><span class="p">,</span> <span class="n">resonance</span><span class="p">,</span> <span class="n">gain</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input_file</span> <span class="o">=</span> <span class="s1">&#39;./temporary_augmented_audio_in.wav&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output_file</span> <span class="o">=</span> <span class="s1">&#39;./temporary_augmented_audio_out.wav&#39;</span>
 
-<div class="viewcode-block" id="EqualizerAugmentation.augment"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.equalizer.EqualizerAugmentation.augment">[docs]</a>    <span class="k">def</span> <span class="nf">augment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sr</span><span class="p">):</span>
+<div class="viewcode-block" id="EqualizerAugmentation.augment"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.EqualizerAugmentation.augment">[docs]</a>    <span class="k">def</span> <span class="nf">augment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sr</span><span class="p">):</span>
         <span class="n">librosa</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">write_wav</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span>
@@ -71,7 +72,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">signal</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="EqualizerAugmentation.cleanup"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.equalizer.EqualizerAugmentation.cleanup">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="EqualizerAugmentation.cleanup"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.EqualizerAugmentation.cleanup">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
@@ -104,8 +105,6 @@
 <ul>
   <li><a href="../../../index.html">Documentation overview</a><ul>
   <li><a href="../../index.html">Module code</a><ul>
-  <li><a href="../augmentation.html">audaugio.augmentation</a><ul>
-  </ul></li>
   </ul></li>
   </ul></li>
 </ul>
