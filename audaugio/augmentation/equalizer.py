@@ -1,13 +1,7 @@
-import os
-
-import librosa
-import sox
-from sox import SoxError
-
-from .augmentation_base import AugmentationBase
+from .augmentation_base import SoxAugmentationBase
 
 
-class EqualizerAugmentation(AugmentationBase):
+class EqualizerAugmentation(SoxAugmentationBase):
     """
     Add an arbitrarily tall and wide frequency filter at an arbitrary frequency.
 
@@ -18,32 +12,34 @@ class EqualizerAugmentation(AugmentationBase):
 
     def __init__(self, frequency: float, resonance: float, gain: float):
         super().__init__(replaces=False)
-        self.transformer = sox.Transformer()
         self.transformer.equalizer(frequency, resonance, gain)
-        self.input_file = './temporary_augmented_audio_in.wav'
-        self.output_file = './temporary_augmented_audio_out.wav'
 
-    def augment(self, signal, sr):
-        librosa.output.write_wav(self.input_file, signal, sr=sr)
-        try:
-            self.transformer.build(self.input_file, self.output_file)
-        except SoxError as e:
-            self.cleanup()
-            if 'sox: command not found' in e.args[0]:
-                raise OSError("You need a working installation of SoX to use this augmentation.\nIf you haven't installed it, "
-                              "go to http://sox.sourceforge.net/ for a download link. Otherwise, double check your path variables.")
-            else:
-                raise e
-        signal, sr = librosa.load(self.output_file, sr=sr)
-        self.cleanup()
-        return [signal]
 
-    def cleanup(self):
-        try:
-            os.remove(self.input_file)
-        except FileNotFoundError:
-            pass
-        try:
-            os.remove(self.output_file)
-        except FileNotFoundError:
-            pass
+class LowPassAugmentation(SoxAugmentationBase):
+    def __init__(self, frequency: float, resonance: float, n_poles: int = 1):
+        """
+        Filter out high frequencies.
+
+        :param frequency: center of the filter
+        :param resonance: width of the filter as a q-factor. Only applies when n_poles = 2.
+        :param n_poles: either 1 or 2. Number of poles in the filter.
+        """
+        super().__init__(replaces=False)
+        if n_poles not in [1, 2]:
+            raise ValueError("n_poles must be 1 or 2, not {0}".format(n_poles))
+        self.transformer.lowpass(frequency, resonance, n_poles)
+
+
+class HighPassAugmentation(SoxAugmentationBase):
+    def __init__(self, frequency: float, resonance: float, n_poles: int = 1):
+        """
+        Filter out low frequencies.
+
+        :param frequency: center of the filter
+        :param resonance: width of the filter as a q-factor. Only applies when n_poles = 2.
+        :param n_poles: either 1 or 2. Number of poles in the filter.
+        """
+        super().__init__(replaces=False)
+        if n_poles not in [1, 2]:
+            raise ValueError("n_poles must be 1 or 2, not {0}".format(n_poles))
+        self.transformer.highpass(frequency, resonance, n_poles)

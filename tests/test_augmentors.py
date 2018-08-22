@@ -3,11 +3,7 @@ from typing import List
 
 import numpy as np
 
-from audaugio.augmentation.windowing import WindowingAugmentation
-from audaugio.augmentation.equalizer import EqualizerAugmentation
-from audaugio.augmentation.time_stretch import TimeStretchAugmentation
-from audaugio.augmentation.pitch_shift import PitchShiftAugmentation
-from audaugio.augmentation.background import BackgroundNoiseAugmentation
+import audaugio
 
 
 class TestAugmentor(unittest.TestCase):
@@ -65,7 +61,7 @@ class TestWindowing(TestAugmentor):
             self._test_number_of_segments(hop_size, ls, sr, window_length, True)
 
     def _test_number_of_segments(self, hop_size, len_sec, sr, window_length, drop_last):
-        augmentor = WindowingAugmentation(window_length, hop_size, drop_last=drop_last)
+        augmentor = audaugio.WindowingAugmentation(window_length, hop_size, drop_last=drop_last)
         audio = self.mock_audio(len_sec, sr)
         expected_n_segments = self.expected_segments(len_sec, window_length, hop_size, drop_last)
         augmented = augmentor.augment(audio, sr)
@@ -75,7 +71,7 @@ class TestWindowing(TestAugmentor):
     def test_returns_array(self):
         window_length = 5
         hop_size = 2
-        augmentor = WindowingAugmentation(window_length, hop_size)
+        augmentor = audaugio.WindowingAugmentation(window_length, hop_size)
 
         augmented = augmentor.augment(self.audio, self.sr)
         self.assertIsInstance(augmented, List)
@@ -85,7 +81,7 @@ class TestBackgroundNoise(TestAugmentor):
     def setUp(self):
         super().setUp()
         self.amplitude = .005
-        self.augmentor = BackgroundNoiseAugmentation(self.amplitude)
+        self.augmentor = audaugio.BackgroundNoiseAugmentation(self.amplitude)
 
     def test_length(self):
         augmented = self.augmentor.augment(self.audio, self.sr)
@@ -98,17 +94,17 @@ class TestBackgroundNoise(TestAugmentor):
 
 class TestTimeStretch(TestAugmentor):
     def test_speed_up(self):
-        augmentor = TimeStretchAugmentation(1 + .1 * np.random.random())
+        augmentor = audaugio.TimeStretchAugmentation(1 + .1 * np.random.random())
         augmented = augmentor.augment(self.audio, self.sr)
         self.assertLess(len(augmented[0]), len(self.audio))
 
     def test_slow_down(self):
-        augmentor = TimeStretchAugmentation(1 - .1 * np.random.random())
+        augmentor = audaugio.TimeStretchAugmentation(1 - .1 * np.random.random())
         augmented = augmentor.augment(self.audio, self.sr)
         self.assertGreater(len(augmented[0]), len(self.audio))
 
     def test_returns_array(self):
-        augmentor = TimeStretchAugmentation(1.05)
+        augmentor = audaugio.TimeStretchAugmentation(1.05)
         augmented = augmentor.augment(self.audio, self.sr)
         self.assertIsInstance(augmented, List)
 
@@ -116,39 +112,39 @@ class TestTimeStretch(TestAugmentor):
 class TestPitchShift(TestAugmentor):
     def test_pitch_up(self):
         steps = np.random.randint(low=1, high=5)
-        augmentor = PitchShiftAugmentation(steps)
+        augmentor = audaugio.PitchShiftAugmentation(steps)
         augmented = augmentor.augment(self.audio, self.sr)
         self.assertEqual(len(augmented), 1)
         self.assertEqual(len(augmented[0]), len(self.audio))
 
     def test_pitch_down(self):
         steps = -np.random.randint(low=1, high=5)
-        augmentor = PitchShiftAugmentation(steps)
+        augmentor = audaugio.PitchShiftAugmentation(steps)
         augmented = augmentor.augment(self.audio, self.sr)
         self.assertEqual(len(augmented), 1)
         self.assertEqual(len(augmented[0]), len(self.audio))
 
     def test_returns_array(self):
-        augmentor = PitchShiftAugmentation(1)
+        augmentor = audaugio.PitchShiftAugmentation(1)
         augmented = augmentor.augment(self.audio, self.sr)
         self.assertIsInstance(augmented, List)
 
 
 class TestEqualizer(TestAugmentor):
-    def test_low_pass(self):
+    def test_gain_up(self):
         freq = 16000
         q = .1
         gain = 1
-        augmentor = EqualizerAugmentation(freq, q, gain)
+        augmentor = audaugio.EqualizerAugmentation(freq, q, gain)
         augmented = augmentor.augment(self.audio, self.sr)
         self.assertEqual(len(augmented), 1)
         self.assertEqual(len(augmented[0]), len(self.audio))
 
-    def test_high_pass(self):
+    def test_gain_down(self):
         freq = 400
         q = .2
-        gain = 3
-        augmentor = EqualizerAugmentation(freq, q, gain)
+        gain = -3
+        augmentor = audaugio.EqualizerAugmentation(freq, q, gain)
         augmented = augmentor.augment(self.audio, self.sr)
         self.assertEqual(len(augmented), 1)
         self.assertEqual(len(augmented[0]), len(self.audio))
@@ -157,7 +153,57 @@ class TestEqualizer(TestAugmentor):
         freq = 800
         q = .15
         gain = 1
-        augmentor = EqualizerAugmentation(freq, q, gain)
+        augmentor = audaugio.EqualizerAugmentation(freq, q, gain)
+        augmented = augmentor.augment(self.audio, self.sr)
+        self.assertIsInstance(augmented, List)
+
+
+class TestLowPass(TestAugmentor):
+    def test_one_pole(self):
+        freq = np.random.randint(low=400, high=int(self.sr * .5))
+        q = .5  # doesn't matter
+        augmentor = audaugio.LowPassAugmentation(freq, q, 1)
+        augmented = augmentor.augment(self.audio, self.sr)
+        self.assertEqual(len(augmented), 1)
+        self.assertEqual(len(augmented[0]), len(self.audio))
+
+    def test_two_poles(self):
+        freq = np.random.randint(low=400, high=int(self.sr * .5))
+        q = .7
+        augmentor = audaugio.LowPassAugmentation(freq, q, 2)
+        augmented = augmentor.augment(self.audio, self.sr)
+        self.assertEqual(len(augmented), 1)
+        self.assertEqual(len(augmented[0]), len(self.audio))
+
+    def test_returns_array(self):
+        freq = 800
+        q = .15
+        augmentor = audaugio.LowPassAugmentation(freq, q, 2)
+        augmented = augmentor.augment(self.audio, self.sr)
+        self.assertIsInstance(augmented, List)
+
+
+class TestHighPass(TestAugmentor):
+    def test_one_pole(self):
+        freq = np.random.randint(low=400, high=int(self.sr * .5))
+        q = .5  # doesn't matter
+        augmentor = audaugio.HighPassAugmentation(freq, q, 1)
+        augmented = augmentor.augment(self.audio, self.sr)
+        self.assertEqual(len(augmented), 1)
+        self.assertEqual(len(augmented[0]), len(self.audio))
+
+    def test_two_poles(self):
+        freq = np.random.randint(low=400, high=int(self.sr * .5))
+        q = .7
+        augmentor = audaugio.HighPassAugmentation(freq, q, 2)
+        augmented = augmentor.augment(self.audio, self.sr)
+        self.assertEqual(len(augmented), 1)
+        self.assertEqual(len(augmented[0]), len(self.audio))
+
+    def test_returns_array(self):
+        freq = 800
+        q = .15
+        augmentor = audaugio.HighPassAugmentation(freq, q, 2)
         augmented = augmentor.augment(self.audio, self.sr)
         self.assertIsInstance(augmented, List)
 
