@@ -18,8 +18,11 @@ Install AudAugio with pip:
 If you want to use one of the built-in augmentations that relies on SoX,
 you’ll need to install it separately. You can do that at `the SoX
 SourceForge page`_. Augmentations that rely on SoX note that in their
-documentation, and are listed here: \* Equalizer Augmentation \* Low
-Pass Augmentation \* High Pass Augmentation
+documentation, and are listed here:
+
+- Equalizer Augmentation
+- Low Pass Augmentation
+- High Pass Augmentation
 
 Use
 ---
@@ -43,9 +46,8 @@ Below is an example of how to use AudAugio to augment an audio file:
     for i, a in enumerate(augmented_audio):
         librosa.output.write_wav("output/{0}.wav".format(i), a, sr)
 
+For more, read `the documentation for AudAugio`_.
 
-Included Augmentations
-----------------------
 
 Augmentation Chains
 -------------------
@@ -57,9 +59,12 @@ unmodified version of the signal for each augmentation, which are then
 each augmented further by the remaining augmentations in the chain. For
 example, if a single signal is combinatorically augmented with both a
 pitch shift augmentation and a background noise augmentation, there will
-be four resulting augmented signals: \* The dry signal \* The pitch
-shifted signal \* The signal with background noise added \* The pitch
-shifted signal with background noise added
+be four resulting augmented signals:
+
+- The dry signal
+- The pitch shifted signal
+- The signal with background noise added
+- The pitch shifted signal with background noise added
 
 Linear chains do not retain the unmodified signal after processing. If
 same chain as above was applied, the only signal returned would be the
@@ -73,4 +78,4 @@ questions or issues. Please look at the “issues” page before reporting
 problems.
 
 .. _the SoX SourceForge page: https://sourceforge.net/projects/sox/files/sox/
-
+.. _the documentation for AudAugio: https://audaugio.readthedocs.io/
