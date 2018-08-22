@@ -2,8 +2,12 @@ import unittest
 
 import numpy as np
 
-from audaugio.chain import CombinatoricChain, LinearChain
-from audaugio.augmentation import BackgroundNoiseAugmentation, EqualizerAugmentation, PitchShiftAugmentation, TimeStretchAugmentation
+from audaugio.chain.linear import LinearChain
+from audaugio.chain.combinatoric import CombinatoricChain
+from audaugio.augmentation.equalizer import EqualizerAugmentation
+from audaugio.augmentation.time_stretch import TimeStretchAugmentation
+from audaugio.augmentation.pitch_shift import PitchShiftAugmentation
+from audaugio.augmentation.background import BackgroundNoiseAugmentation
 
 
 class TestChain(unittest.TestCase):

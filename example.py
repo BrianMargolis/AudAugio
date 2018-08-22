@@ -1,7 +1,7 @@
 import librosa
 
-from audaugio.chain import CombinatoricChain
-from audaugio.augmentation import BackgroundNoiseAugmentation, EqualizerAugmentation, PitchShiftAugmentation
+from audaugio import EqualizerAugmentation, BackgroundNoiseAugmentation, PitchShiftAugmentation
+from audaugio.chain.combinatoric import CombinatoricChain
 
 y, sr = librosa.load('sample.wav')
 
