@@ -14,9 +14,9 @@ setuptools.setup(
     url="https://github.com/BrianMargolis/AudAugio",
     packages=setuptools.find_packages(),
     install_requires=['librosa', 'numpy', 'sox'],
+    python_requires='>=3.0',
     classifiers=[
         "Development Status :: 3 - Alpha",
-        'Programming Language :: Python :: 2',
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
