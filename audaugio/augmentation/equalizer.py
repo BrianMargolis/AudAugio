@@ -16,14 +16,14 @@ class EqualizerAugmentation(SoxAugmentationBase):
 
 
 class LowPassAugmentation(SoxAugmentationBase):
-    def __init__(self, frequency: float, resonance: float, n_poles: int = 1):
-        """
-        Filter out high frequencies.
+    """
+    Filter out high frequencies.
 
-        :param frequency: center of the filter
-        :param resonance: width of the filter as a q-factor. Only applies when n_poles = 2.
-        :param n_poles: either 1 or 2. Number of poles in the filter.
-        """
+    :param frequency: center of the filter
+    :param resonance: width of the filter as a q-factor. Only applies when n_poles = 2.
+    :param n_poles: either 1 or 2. Number of poles in the filter.
+    """
+    def __init__(self, frequency: float, resonance: float, n_poles: int = 1):
         super().__init__(replaces=False)
         if n_poles not in [1, 2]:
             raise ValueError("n_poles must be 1 or 2, not {0}".format(n_poles))
@@ -31,14 +31,14 @@ class LowPassAugmentation(SoxAugmentationBase):
 
 
 class HighPassAugmentation(SoxAugmentationBase):
-    def __init__(self, frequency: float, resonance: float, n_poles: int = 1):
-        """
-        Filter out low frequencies.
+    """
+    Filter out low frequencies.
 
-        :param frequency: center of the filter
-        :param resonance: width of the filter as a q-factor. Only applies when n_poles = 2.
-        :param n_poles: either 1 or 2. Number of poles in the filter.
-        """
+    :param frequency: center of the filter
+    :param resonance: width of the filter as a q-factor. Only applies when n_poles = 2.
+    :param n_poles: either 1 or 2. Number of poles in the filter.
+    """
+    def __init__(self, frequency: float, resonance: float, n_poles: int = 1):
         super().__init__(replaces=False)
         if n_poles not in [1, 2]:
             raise ValueError("n_poles must be 1 or 2, not {0}".format(n_poles))
