@@ -3,11 +3,7 @@ from typing import List
 
 import numpy as np
 
-from audaugio.augmentation.background_noise import BackgroundNoiseAugmentation
-from audaugio.augmentation.equalizer import EqualizerAugmentation
-from audaugio.augmentation.pitch_shift import PitchShiftAugmentation
-from audaugio.augmentation.time_stretch import TimeStretchAugmentation
-from audaugio.augmentation.windowing import WindowingAugmentation
+from audaugio.augmentation import BackgroundNoiseAugmentation, EqualizerAugmentation, PitchShiftAugmentation, TimeStretchAugmentation, WindowingAugmentation
 
 
 class TestAugmentor(unittest.TestCase):
