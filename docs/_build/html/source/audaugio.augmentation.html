@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>audaugio.augmentation package &mdash; AudAugio 0.0.1a0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> AudAugio
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1a0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">audaugio.augmentation package</a><ul>
+<li><a class="reference internal" href="#module-audaugio.augmentation">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AudAugio</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>audaugio.augmentation package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/audaugio.augmentation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="audaugio-augmentation-package">
+<h1>audaugio.augmentation package<a class="headerlink" href="#audaugio-augmentation-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-audaugio.augmentation">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-audaugio.augmentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="audaugio.augmentation.AugmentationBase">
+<em class="property">class </em><code class="descclassname">audaugio.augmentation.</code><code class="descname">AugmentationBase</code><span class="sig-paren">(</span><em>replaces: bool</em>, <em>*kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/augmentation_base.html#AugmentationBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.AugmentationBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for an augmentation. Implement this to create your own augmentations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>replaces</strong> – whether the augmentation should replace the audio it augments. Usually will be false.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="audaugio.augmentation.AugmentationBase.augment">
+<code class="descname">augment</code><span class="sig-paren">(</span><em>signal</em>, <em>sr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/augmentation_base.html#AugmentationBase.augment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.AugmentationBase.augment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a signal, apply the augmentation and return all resulting augmented audio as a list (even if it’s a single signal).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>signal</strong> – unaugmented signal, ndarray</li>
+<li><strong>sr</strong> – sample rate, int</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="audaugio.augmentation.BackgroundNoiseAugmentation">
+<em class="property">class </em><code class="descclassname">audaugio.augmentation.</code><code class="descname">BackgroundNoiseAugmentation</code><span class="sig-paren">(</span><em>amplitude</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/background.html#BackgroundNoiseAugmentation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.BackgroundNoiseAugmentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add background noise randomly sampled from a 0-centered normal distribution.</p>
+<dl class="method">
+<dt id="audaugio.augmentation.BackgroundNoiseAugmentation.augment">
+<code class="descname">augment</code><span class="sig-paren">(</span><em>signal</em>, <em>sr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/background.html#BackgroundNoiseAugmentation.augment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.BackgroundNoiseAugmentation.augment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a signal, apply the augmentation and return all resulting augmented audio as a list (even if it’s a single signal).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>signal</strong> – unaugmented signal, ndarray</li>
+<li><strong>sr</strong> – sample rate, int</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="audaugio.augmentation.EqualizerAugmentation">
+<em class="property">class </em><code class="descclassname">audaugio.augmentation.</code><code class="descname">EqualizerAugmentation</code><span class="sig-paren">(</span><em>frequency: float</em>, <em>resonance: float</em>, <em>gain: float</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/equalizer.html#EqualizerAugmentation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.EqualizerAugmentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an arbitrarily tall and wide frequency filter at an arbitrary frequency.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>frequency</strong> – center of the filter</li>
+<li><strong>resonance</strong> – width of the filter as a q-factor</li>
+<li><strong>gain</strong> – height of the filter in dB</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="audaugio.augmentation.PitchShiftAugmentation">
+<em class="property">class </em><code class="descclassname">audaugio.augmentation.</code><code class="descname">PitchShiftAugmentation</code><span class="sig-paren">(</span><em>steps</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/pitch_shift.html#PitchShiftAugmentation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.PitchShiftAugmentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pitch shift a signal by half-steps without changing the duration.</p>
+<dl class="method">
+<dt id="audaugio.augmentation.PitchShiftAugmentation.augment">
+<code class="descname">augment</code><span class="sig-paren">(</span><em>signal</em>, <em>sr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/pitch_shift.html#PitchShiftAugmentation.augment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.PitchShiftAugmentation.augment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a signal, apply the augmentation and return all resulting augmented audio as a list (even if it’s a single signal).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>signal</strong> – unaugmented signal, ndarray</li>
+<li><strong>sr</strong> – sample rate, int</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="audaugio.augmentation.TimeStretchAugmentation">
+<em class="property">class </em><code class="descclassname">audaugio.augmentation.</code><code class="descname">TimeStretchAugmentation</code><span class="sig-paren">(</span><em>rate</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/time_stretch.html#TimeStretchAugmentation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.TimeStretchAugmentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the duration of a signal without changing its pitch.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rate</strong> – factor by which to speed up or slow down the signal. When rate is 1, the signal is not modified.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="audaugio.augmentation.TimeStretchAugmentation.augment">
+<code class="descname">augment</code><span class="sig-paren">(</span><em>signal</em>, <em>sr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/time_stretch.html#TimeStretchAugmentation.augment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.TimeStretchAugmentation.augment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a signal, apply the augmentation and return all resulting augmented audio as a list (even if it’s a single signal).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>signal</strong> – unaugmented signal, ndarray</li>
+<li><strong>sr</strong> – sample rate, int</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="audaugio.augmentation.WindowingAugmentation">
+<em class="property">class </em><code class="descclassname">audaugio.augmentation.</code><code class="descname">WindowingAugmentation</code><span class="sig-paren">(</span><em>window_length: float</em>, <em>hop_size: float</em>, <em>drop_last=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/windowing.html#WindowingAugmentation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.WindowingAugmentation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Window a signal into many segments of equal length. If hop_size is less than window_length, these windows will overlap.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>window_length</strong> – the length in seconds of a window</li>
+<li><strong>hop_size</strong> – the distance in seconds between the start of each window</li>
+<li><strong>drop_last</strong> – whether to zero-pad the last segment of audio when it is shorter than window_length. If false, this part of the signal is dropped.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="audaugio.augmentation.WindowingAugmentation.augment">
+<code class="descname">augment</code><span class="sig-paren">(</span><em>signal</em>, <em>sr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/windowing.html#WindowingAugmentation.augment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.WindowingAugmentation.augment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a signal, apply the augmentation and return all resulting augmented audio as a list (even if it’s a single signal).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>signal</strong> – unaugmented signal, ndarray</li>
+<li><strong>sr</strong> – sample rate, int</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="audaugio.augmentation.LowPassAugmentation">
+<em class="property">class </em><code class="descclassname">audaugio.augmentation.</code><code class="descname">LowPassAugmentation</code><span class="sig-paren">(</span><em>frequency: float</em>, <em>resonance: float</em>, <em>n_poles: int = 1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/equalizer.html#LowPassAugmentation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.LowPassAugmentation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="audaugio.augmentation.HighPassAugmentation">
+<em class="property">class </em><code class="descclassname">audaugio.augmentation.</code><code class="descname">HighPassAugmentation</code><span class="sig-paren">(</span><em>frequency: float</em>, <em>resonance: float</em>, <em>n_poles: int = 1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/equalizer.html#HighPassAugmentation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.HighPassAugmentation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Brian Margolis.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1a0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
