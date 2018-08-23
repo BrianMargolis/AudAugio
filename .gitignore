@@ -2,6 +2,7 @@
 venv/*
 
 *.pyc
+*.wav
 
 build/*
 dist/*
