@@ -325,12 +325,40 @@
 <dl class="class">
 <dt id="audaugio.augmentation.LowPassAugmentation">
 <em class="property">class </em><code class="descclassname">audaugio.augmentation.</code><code class="descname">LowPassAugmentation</code><span class="sig-paren">(</span><em>frequency: float</em>, <em>resonance: float</em>, <em>n_poles: int = 1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/equalizer.html#LowPassAugmentation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.LowPassAugmentation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Filter out high frequencies.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>frequency</strong> – center of the filter</li>
+<li><strong>resonance</strong> – width of the filter as a q-factor. Only applies when n_poles = 2.</li>
+<li><strong>n_poles</strong> – either 1 or 2. Number of poles in the filter.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="class">
 <dt id="audaugio.augmentation.HighPassAugmentation">
 <em class="property">class </em><code class="descclassname">audaugio.augmentation.</code><code class="descname">HighPassAugmentation</code><span class="sig-paren">(</span><em>frequency: float</em>, <em>resonance: float</em>, <em>n_poles: int = 1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/augmentation/equalizer.html#HighPassAugmentation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.augmentation.HighPassAugmentation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Filter out low frequencies.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>frequency</strong> – center of the filter</li>
+<li><strong>resonance</strong> – width of the filter as a q-factor. Only applies when n_poles = 2.</li>
+<li><strong>n_poles</strong> – either 1 or 2. Number of poles in the filter.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 </div>

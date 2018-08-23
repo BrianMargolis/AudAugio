@@ -161,14 +161,14 @@
 
 
 <div class="viewcode-block" id="LowPassAugmentation"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.LowPassAugmentation">[docs]</a><span class="k">class</span> <span class="nc">LowPassAugmentation</span><span class="p">(</span><span class="n">SoxAugmentationBase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">resonance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n_poles</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Filter out high frequencies.</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter out high frequencies.</span>
 
-<span class="sd">        :param frequency: center of the filter</span>
-<span class="sd">        :param resonance: width of the filter as a q-factor. Only applies when n_poles = 2.</span>
-<span class="sd">        :param n_poles: either 1 or 2. Number of poles in the filter.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">    :param frequency: center of the filter</span>
+<span class="sd">    :param resonance: width of the filter as a q-factor. Only applies when n_poles = 2.</span>
+<span class="sd">    :param n_poles: either 1 or 2. Number of poles in the filter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">resonance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n_poles</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">replaces</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n_poles</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n_poles must be 1 or 2, not </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_poles</span><span class="p">))</span>
@@ -176,14 +176,14 @@
 
 
 <div class="viewcode-block" id="HighPassAugmentation"><a class="viewcode-back" href="../../../source/audaugio.augmentation.html#audaugio.augmentation.HighPassAugmentation">[docs]</a><span class="k">class</span> <span class="nc">HighPassAugmentation</span><span class="p">(</span><span class="n">SoxAugmentationBase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">resonance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n_poles</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Filter out low frequencies.</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter out low frequencies.</span>
 
-<span class="sd">        :param frequency: center of the filter</span>
-<span class="sd">        :param resonance: width of the filter as a q-factor. Only applies when n_poles = 2.</span>
-<span class="sd">        :param n_poles: either 1 or 2. Number of poles in the filter.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">    :param frequency: center of the filter</span>
+<span class="sd">    :param resonance: width of the filter as a q-factor. Only applies when n_poles = 2.</span>
+<span class="sd">    :param n_poles: either 1 or 2. Number of poles in the filter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">resonance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n_poles</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">replaces</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n_poles</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;n_poles must be 1 or 2, not </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_poles</span><span class="p">))</span>

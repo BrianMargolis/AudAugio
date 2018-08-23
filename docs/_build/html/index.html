@@ -86,7 +86,6 @@
 <li><a class="reference internal" href="#audaugio">AudAugio</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#use">Use</a></li>
-<li><a class="reference internal" href="#included-augmentations">Included Augmentations</a></li>
 <li><a class="reference internal" href="#augmentation-chains">Augmentation Chains</a></li>
 <li><a class="reference internal" href="#contact">Contact</a></li>
 </ul>
@@ -178,8 +177,12 @@ as a framework for applying and layering those augmentations.</p>
 <p>If you want to use one of the built-in augmentations that relies on SoX,
 you’ll need to install it separately. You can do that at <a class="reference external" href="https://sourceforge.net/projects/sox/files/sox/">the SoX
 SourceForge page</a>. Augmentations that rely on SoX note that in their
-documentation, and are listed here: * Equalizer Augmentation * Low
-Pass Augmentation * High Pass Augmentation</p>
+documentation, and are listed here:</p>
+<ul class="simple">
+<li>Equalizer Augmentation</li>
+<li>Low Pass Augmentation</li>
+<li>High Pass Augmentation</li>
+</ul>
 </div>
 <div class="section" id="use">
 <h2>Use<a class="headerlink" href="#use" title="Permalink to this headline">¶</a></h2>
@@ -200,9 +203,7 @@ Pass Augmentation * High Pass Augmentation</p>
     <span class="n">librosa</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">write_wav</span><span class="p">(</span><span class="s2">&quot;output/</span><span class="si">{0}</span><span class="s2">.wav&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">a</span><span class="p">,</span> <span class="n">sr</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="included-augmentations">
-<h2>Included Augmentations<a class="headerlink" href="#included-augmentations" title="Permalink to this headline">¶</a></h2>
+<p>For more, read <a class="reference external" href="https://audaugio.readthedocs.io/">the documentation for AudAugio</a>.</p>
 </div>
 <div class="section" id="augmentation-chains">
 <h2>Augmentation Chains<a class="headerlink" href="#augmentation-chains" title="Permalink to this headline">¶</a></h2>
@@ -213,9 +214,13 @@ unmodified version of the signal for each augmentation, which are then
 each augmented further by the remaining augmentations in the chain. For
 example, if a single signal is combinatorically augmented with both a
 pitch shift augmentation and a background noise augmentation, there will
-be four resulting augmented signals: * The dry signal * The pitch
-shifted signal * The signal with background noise added * The pitch
-shifted signal with background noise added</p>
+be four resulting augmented signals:</p>
+<ul class="simple">
+<li>The dry signal</li>
+<li>The pitch shifted signal</li>
+<li>The signal with background noise added</li>
+<li>The pitch shifted signal with background noise added</li>
+</ul>
 <p>Linear chains do not retain the unmodified signal after processing. If
 same chain as above was applied, the only signal returned would be the
 pitch shifted signal with background noise added.</p>
