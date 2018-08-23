@@ -4,8 +4,14 @@ from audaugio import AugmentationBase
 
 
 class ChainBase:
-    def __init__(self, *args: AugmentationBase):
-        self._augmentations = list(args)
+    """
+    Base class for an augmentation chain. Implement this to define your own augmentation chains.
+
+    :param augmentations:
+    """
+
+    def __init__(self, *augmentations: AugmentationBase):
+        self._augmentations = list(augmentations)
 
     def __add__(self, new_augmentation: AugmentationBase):
         self._augmentations.append(new_augmentation)

@@ -6,7 +6,7 @@ class LinearChain(ChainBase):
     """
     Apply augmentations linearly. The signal is modified by each augmentation in the order that they are passed into the constructor.
 
-    :param args: an arbitrary amount of augmentations
+    :param augmentations: an arbitrary amount of augmentations
     """
 
     def __init__(self, *augmentations: AugmentationBase):
