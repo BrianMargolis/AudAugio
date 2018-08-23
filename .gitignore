@@ -1,3 +1,8 @@
 .idea/*
 venv/*
+
 *.pyc
+
+build/*
+dist/*
+*.egg-info/*
