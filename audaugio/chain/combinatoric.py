@@ -8,7 +8,7 @@ class CombinatoricChain(ChainBase):
     augmentation is performed, both the resulting augmented signal and the original signal are kept and augmented further). Note that some augmentations,
     like the windowing augmentation, always replace the audio they augment.
 
-    :param args: an arbitrary amount of augmentations
+    :param augmentations: an arbitrary amount of augmentations
     """
 
     def __init__(self, *augmentations: AugmentationBase):

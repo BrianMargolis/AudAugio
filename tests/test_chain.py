@@ -2,12 +2,7 @@ import unittest
 
 import numpy as np
 
-from audaugio.chain.linear import LinearChain
-from audaugio.chain.combinatoric import CombinatoricChain
-from audaugio.augmentation.equalizer import EqualizerAugmentation
-from audaugio.augmentation.time_stretch import TimeStretchAugmentation
-from audaugio.augmentation.pitch_shift import PitchShiftAugmentation
-from audaugio.augmentation.background import BackgroundNoiseAugmentation
+import audaugio
 
 
 class TestChain(unittest.TestCase):
@@ -27,24 +22,24 @@ class TestCombinatoricChain(TestChain):
         super().setUp()
 
     def test_empty_chain(self):
-        chain = CombinatoricChain()
+        chain = audaugio.CombinatoricChain()
         augmented = chain(self.signal, self.sr)
         self.assertEqual(len(augmented), 1)
         self.assertEqual(np.sum(augmented[0] == self.signal), len(augmented[0]))
 
     def test_small_chain(self):
-        chain = CombinatoricChain(PitchShiftAugmentation(1),
-                                  TimeStretchAugmentation(.95),
-                                  EqualizerAugmentation(400, 1, 2))
+        chain = audaugio.CombinatoricChain(audaugio.PitchShiftAugmentation(1),
+                                           audaugio.TimeStretchAugmentation(.95),
+                                           audaugio.EqualizerAugmentation(400, 1, 2))
         augmented = chain(self.signal, self.sr)
         self.assertEqual(len(augmented), 2 ** 3)
 
     def test_large_chain(self):
-        chain = CombinatoricChain(PitchShiftAugmentation(-1),
-                                  TimeStretchAugmentation(.95),
-                                  EqualizerAugmentation(300, 1, 2),
-                                  BackgroundNoiseAugmentation(.005),
-                                  TimeStretchAugmentation(1.25))
+        chain = audaugio.CombinatoricChain(audaugio.PitchShiftAugmentation(-1),
+                                           audaugio.TimeStretchAugmentation(.95),
+                                           audaugio.EqualizerAugmentation(300, 1, 2),
+                                           audaugio.BackgroundNoiseAugmentation(.005),
+                                           audaugio.TimeStretchAugmentation(1.25))
         augmented = chain(self.signal, self.sr)
         self.assertEqual(len(augmented), 2 ** 5)
 
@@ -54,26 +49,52 @@ class TestLinearChain(TestChain):
         super().setUp()
 
     def test_empty_chain(self):
-        chain = LinearChain()
+        chain = audaugio.LinearChain()
         augmented = chain(self.signal, self.sr)
         self.assertEqual(len(augmented), 1)
         self.assertEqual(np.sum(augmented[0] == self.signal), len(augmented[0]))
 
     def test_small_chain(self):
-        chain = LinearChain(PitchShiftAugmentation(1),
-                            TimeStretchAugmentation(.95),
-                            EqualizerAugmentation(400, 1, 2))
+        chain = audaugio.LinearChain(audaugio.PitchShiftAugmentation(1),
+                                     audaugio.TimeStretchAugmentation(.95),
+                                     audaugio.EqualizerAugmentation(400, 1, 2))
         augmented = chain(self.signal, self.sr)
         self.assertEqual(len(augmented), 1)
 
     def test_large_chain(self):
-        chain = LinearChain(PitchShiftAugmentation(-1),
-                            TimeStretchAugmentation(.95),
-                            EqualizerAugmentation(300, 1, 2),
-                            BackgroundNoiseAugmentation(.005),
-                            TimeStretchAugmentation(1.25))
+        chain = audaugio.LinearChain(audaugio.PitchShiftAugmentation(-1),
+                                     audaugio.TimeStretchAugmentation(.95),
+                                     audaugio.EqualizerAugmentation(300, 1, 2),
+                                     audaugio.BackgroundNoiseAugmentation(.005),
+                                     audaugio.TimeStretchAugmentation(1.25))
         augmented = chain(self.signal, self.sr)
         self.assertEqual(len(augmented), 1)
+
+
+class TestFlatChain(TestChain):
+    def setUp(self):
+        super().setUp()
+
+    def test_empty_chain(self):
+        chain = audaugio.FlatChain()
+        augmented = chain(self.signal, self.sr)
+        self.assertEqual(len(augmented), 0)
+
+    def test_small_chain(self):
+        chain = audaugio.FlatChain(audaugio.PitchShiftAugmentation(1),
+                                   audaugio.TimeStretchAugmentation(.95),
+                                   audaugio.EqualizerAugmentation(400, 1, 2))
+        augmented = chain(self.signal, self.sr)
+        self.assertEqual(len(augmented), 3)
+
+    def test_large_chain(self):
+        chain = audaugio.FlatChain(audaugio.PitchShiftAugmentation(-1),
+                                   audaugio.TimeStretchAugmentation(.95),
+                                   audaugio.EqualizerAugmentation(300, 1, 2),
+                                   audaugio.BackgroundNoiseAugmentation(.005),
+                                   audaugio.TimeStretchAugmentation(1.25))
+        augmented = chain(self.signal, self.sr)
+        self.assertEqual(len(augmented), 5)
 
 
 if __name__ == '__main__':
