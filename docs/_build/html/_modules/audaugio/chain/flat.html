@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>audaugio.chain.combinatoric &mdash; AudAugio 0.0.1a0 documentation</title>
+  <title>audaugio.chain.flat &mdash; AudAugio 0.0.1a0 documentation</title>
   
 
   
@@ -127,7 +127,7 @@
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
-      <li>audaugio.chain.combinatoric</li>
+      <li>audaugio.chain.flat</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -142,16 +142,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for audaugio.chain.combinatoric</h1><div class="highlight"><pre>
+  <h1>Source code for audaugio.chain.flat</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">audaugio</span> <span class="k">import</span> <span class="n">AugmentationBase</span>
 <span class="kn">from</span> <span class="nn">.chain_base</span> <span class="k">import</span> <span class="n">ChainBase</span>
 
 
-<div class="viewcode-block" id="CombinatoricChain"><a class="viewcode-back" href="../../../source/audaugio.chain.html#audaugio.chain.CombinatoricChain">[docs]</a><span class="k">class</span> <span class="nc">CombinatoricChain</span><span class="p">(</span><span class="n">ChainBase</span><span class="p">):</span>
+<div class="viewcode-block" id="FlatChain"><a class="viewcode-back" href="../../../source/audaugio.chain.html#audaugio.chain.FlatChain">[docs]</a><span class="k">class</span> <span class="nc">FlatChain</span><span class="p">(</span><span class="n">ChainBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Apply augmentations combinatorically. This will return all possible combinations of non-replacing augmentations (i.e. when a non-replacing</span>
-<span class="sd">    augmentation is performed, both the resulting augmented signal and the original signal are kept and augmented further). Note that some augmentations,</span>
-<span class="sd">    like the windowing augmentation, always replace the audio they augment.</span>
+<span class="sd">    Apply augmentations without layering any on top of others. The signal is modified by each augmentation and saved. Useful for qualitatively analyzing</span>
+<span class="sd">    augmentations.</span>
 
 <span class="sd">    :param augmentations: an arbitrary amount of augmentations</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -160,17 +159,9 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">augmentations</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_apply_augmentations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signal</span><span class="p">:</span> <span class="p">[],</span> <span class="n">sr</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="c1"># start with just the original audio and then apply all augmentations</span>
-        <span class="n">augmented_audio</span> <span class="o">=</span> <span class="p">[</span><span class="n">signal</span><span class="p">]</span>
+        <span class="n">augmented_audio</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">augmentation</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_augmentations</span><span class="p">:</span>
-            <span class="n">augmented_audio_batch</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">signal</span> <span class="ow">in</span> <span class="n">augmented_audio</span><span class="p">:</span>
-                <span class="n">augmented_audio_batch</span> <span class="o">+=</span> <span class="n">augmentation</span><span class="o">.</span><span class="n">augment</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">sr</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">augmentation</span><span class="o">.</span><span class="n">replaces</span><span class="p">:</span>  <span class="c1"># e.g. windowing augmentation, which replaces the original audio with windowed versions</span>
-                <span class="n">augmented_audio</span> <span class="o">=</span> <span class="n">augmented_audio_batch</span>
-            <span class="k">else</span><span class="p">:</span>  <span class="c1"># e.g. time stretching augmentation</span>
-                <span class="n">augmented_audio</span> <span class="o">+=</span> <span class="n">augmented_audio_batch</span>
+            <span class="n">augmented_audio</span> <span class="o">+=</span> <span class="n">augmentation</span><span class="o">.</span><span class="n">augment</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">sr</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">augmented_audio</span></div>
 </pre></div>

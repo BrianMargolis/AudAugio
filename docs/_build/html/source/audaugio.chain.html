@@ -156,8 +156,17 @@
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-audaugio.chain" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="audaugio.chain.ChainBase">
-<em class="property">class </em><code class="descclassname">audaugio.chain.</code><code class="descname">ChainBase</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/chain/chain_base.html#ChainBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.chain.ChainBase" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">audaugio.chain.</code><code class="descname">ChainBase</code><span class="sig-paren">(</span><em>*augmentations</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/chain/chain_base.html#ChainBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.chain.ChainBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for an augmentation chain. Implement this to define your own augmentation chains.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>augmentations</strong> – </td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="class">
@@ -171,7 +180,7 @@ like the windowing augmentation, always replace the audio they augment.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> – an arbitrary amount of augmentations</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>augmentations</strong> – an arbitrary amount of augmentations</td>
 </tr>
 </tbody>
 </table>
@@ -186,7 +195,23 @@ like the windowing augmentation, always replace the audio they augment.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> – an arbitrary amount of augmentations</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>augmentations</strong> – an arbitrary amount of augmentations</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="audaugio.chain.FlatChain">
+<em class="property">class </em><code class="descclassname">audaugio.chain.</code><code class="descname">FlatChain</code><span class="sig-paren">(</span><em>*augmentations</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/audaugio/chain/flat.html#FlatChain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#audaugio.chain.FlatChain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">audaugio.chain.chain_base.ChainBase</span></code></p>
+<p>Apply augmentations without layering any on top of others. The signal is modified by each augmentation and saved. Useful for qualitatively analyzing
+augmentations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>augmentations</strong> – an arbitrary amount of augmentations</td>
 </tr>
 </tbody>
 </table>
