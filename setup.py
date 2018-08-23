@@ -5,12 +5,12 @@ with open("README.rst", "r") as fh:
 
 setuptools.setup(
     name="AudAugio",
-    version="0.0.1a1",
+    version="0.0.1a2",
     author="Brian Margolis",
     author_email="BrianMargolis2019@u.northwestern.edu",
     description="Augments audio for machine learning",
     long_description=long_description,
-    long_description_content_type="text/markdown",
+    long_description_content_type="text/x-rst",
     url="https://github.com/BrianMargolis/AudAugio",
     packages=setuptools.find_packages(),
     install_requires=['librosa', 'numpy', 'sox'],
