@@ -13,7 +13,7 @@ librosa==0.6.2
 llvmlite==0.24.0
 MarkupSafe==1.0
 numba==0.39.0
-numpy==1.15.0
+numpy==1.22.0
 packaging==17.1
 Pygments==2.2.0
 pyparsing==2.2.0
